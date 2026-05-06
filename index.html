@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مغامرة الكيمياء السحرية 🌟</title>
+    <meta name="description" content="لعبة كيميائية ممتعة للبنات">
+    
+    <!-- Google Fonts: Baloo Bhaijaan 2 is bubbly and cute -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<!-- Magical Background -->
+<div class="magical-bg">
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+    <div class="bubble b5"></div>
+</div>
+
+<!-- Floating Sparkles -->
+<div class="sparkles-container">
+    <i class="fa-solid fa-star sparkle s1"></i>
+    <i class="fa-solid fa-sparkles sparkle s2"></i>
+    <i class="fa-solid fa-star sparkle s3"></i>
+    <i class="fa-solid fa-heart sparkle s4"></i>
+</div>
+
+<!-- Sound Toggle -->
+<button class="game-btn sound-toggle" onclick="toggleSound()" title="الصوت">
+    <i id="sound-icon" class="fa-solid fa-music"></i>
+</button>
+
+<div id="game-box">
+    <!-- شاشة البداية -->
+    <div id="start-screen" class="screen active">
+        <div class="hero-character">
+            <img src="https://api.dicebear.com/9.x/fun-emoji/svg?seed=Jasmine&backgroundColor=ffb6c1,d8b4fe" alt="Hero Girl" class="avatar-img">
+            <div class="floating-potion">🧪</div>
+        </div>
+        
+        <h1 class="game-title">سحر <br> الكحولات ✨</h1>
+        
+        <div class="level-badge">مستوى التحدي: خبيرة 👑</div>
+
+        <button class="game-btn play-btn" onclick="startGame()">
+            <span><i class="fa-solid fa-play"></i> ابدئي اللعب الآن!</span>
+        </button>
+    </div>
+
+    <!-- شاشة اللعب -->
+    <div id="quiz-screen" class="screen">
+        <!-- Game HUD (Heads Up Display) -->
+        <div class="hud-top">
+            <div class="hud-item hud-level">
+                <i class="fa-solid fa-gem"></i>
+                <span><span id="q-count">1</span>/<span id="total-q">90</span></span>
+            </div>
+            <div class="hud-item hud-streak">
+                <i class="fa-solid fa-fire"></i>
+                <span id="streak-count">0</span>
+            </div>
+            <div class="hud-item hud-score">
+                <i class="fa-solid fa-star"></i>
+                <span id="score">0</span>
+            </div>
+        </div>
+
+        <!-- Magic Progress Bar -->
+        <div class="magic-bar-container">
+            <div class="magic-bar" id="progress-bar">
+                <div class="bar-sparkle">✨</div>
+            </div>
+        </div>
+        
+        <!-- Question Board -->
+        <div class="question-board">
+            <div class="board-pin"></div>
+            <h2 id="question-text"></h2>
+        </div>
+        
+        <!-- Answers -->
+        <div id="answer-area" class="answers-grid"></div>
+
+        <!-- Feedback -->
+        <div id="feedback-area">
+            <div class="feedback-board">
+                <div id="feedback-msg"></div>
+                
+                <div class="feedback-actions">
+                    <button class="game-btn hint-btn" id="explain-btn" onclick="toggleExplanation()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> تلميح سحري
+                    </button>
+                    <button class="game-btn next-btn" id="next-btn" onclick="nextQuestion()">
+                        التالي <i class="fa-solid fa-forward"></i>
+                    </button>
+                </div>
+                <div class="explanation-text" id="explanation-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة النهاية -->
+    <div id="end-screen" class="screen">
+        <div class="victory-avatar">
+            <img src="https://api.dicebear.com/9.x/fun-emoji/svg?seed=Jasmine&backgroundColor=ffb6c1,d8b4fe" alt="Victory" class="avatar-img">
+            <div class="crown">👑</div>
+        </div>
+        <h1 class="game-title victory-title">واااااو! أسطورة! 💖</h1>
+        
+        <div class="score-board">
+            <div class="score-label">مجموع نقاطك</div>
+            <div class="score-value"><span id="final-score">0</span></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="sb-icon">✅</div>
+                <div class="sb-val" id="final-correct">0</div>
+                <div class="sb-lbl">إجابة صحيحة</div>
+            </div>
+            <div class="stat-box">
+                <div class="sb-icon">🔥</div>
+                <div class="sb-val" id="final-streak">0</div>
+                <div class="sb-lbl">أطول سلسلة</div>
+            </div>
+        </div>
+
+        <div class="final-rank-msg" id="final-rank"></div>
+        
+        <button class="game-btn play-btn" onclick="location.reload()">
+            <span><i class="fa-solid fa-rotate-right"></i> العبي مرة أخرى!</span>
+        </button>
+    </div>
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
